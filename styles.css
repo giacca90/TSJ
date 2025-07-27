@@ -1,0 +1,62 @@
+/* Estilos básicos */
+html,
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden; /* Deshabilita scroll por defecto */
+	height: 100vh;
+	width: 100vw;
+}
+
+body {
+	position: relative;
+	font-family: Arial, sans-serif;
+}
+
+/* Video fondo ocupa toda la pantalla */
+video#bg-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
+}
+
+/* Menu fijo arriba */
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 180px;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 20px;
+	box-sizing: border-box;
+	z-index: 10;
+}
+
+/* Logo */
+#logo {
+	width: 120px;
+	height: auto;
+	cursor: pointer;
+	transition: width 0.3s ease;
+}
+
+.links {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.links a {
+	margin: 10px;
+	text-decoration: none;
+	color: white;
+}

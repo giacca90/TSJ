@@ -1,0 +1,20 @@
+{
+	"name": "tsj_wakepark",
+	"version": "1.0.0",
+	"description": "Pagina web para el TSJ WakePark en Francia",
+	"main": "script.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"TSJ",
+		"WakePark",
+		"Francia"
+	],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"dependencies": {
+		"gsap": "^3.13.0"
+	}
+}
