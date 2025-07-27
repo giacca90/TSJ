@@ -6,6 +6,8 @@ body {
 	overflow: hidden; /* Deshabilita scroll por defecto */
 	height: 100vh;
 	width: 100vw;
+	align-items: center;
+	justify-content: center;
 }
 
 body {
@@ -27,7 +29,7 @@ video#bg-video {
 /* Menu fijo arriba */
 nav {
 	position: fixed;
-	top: 0;
+	top: -180px;
 	left: 0;
 	width: 100%;
 	height: 180px;
@@ -59,4 +61,45 @@ nav {
 	margin: 10px;
 	text-decoration: none;
 	color: white;
+}
+
+.links a:hover {
+	color: blue;
+}
+
+.page-2 {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 95%;
+	height: 95%;
+	background: rgba(255, 255, 255, 0.7);
+	display: flex;
+	visibility: hidden;
+	opacity: 0;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+}
+
+.page-2 .content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-2 .tobogan {
+	height: 90%;
+	width: 30%;
+	border: 2px solid red;
+	margin: 15px;
+}
+
+.page-2 p {
+	width: 70%;
+	text-align: center;
+	margin: 5px 15px;
+	padding: 0;
 }
