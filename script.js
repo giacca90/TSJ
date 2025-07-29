@@ -1,12 +1,16 @@
+/* global gsap */
+
 window.addEventListener('DOMContentLoaded', () => {
 	const nav = document.querySelector('nav');
 	const logo = document.getElementById('logo');
 	const page2 = document.querySelector('.page-2');
-	const jump = document.querySelector('.tobogan');
+	const jump = document.querySelector('.jump');
+	const maxScale = 15;
+	const windowHeight = window.innerHeight;
 	let jumpLoaded = false;
 	let scale = 1;
-	const maxScale = 15;
 	let touchStartY = 0;
+	let currentPosition = 0;
 
 	// Guardamos la posición inicial del logo
 	const rect = logo.getBoundingClientRect();
@@ -27,58 +31,66 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	}, 500);
 
-	function updateLogo(deltaY) {
-		// Caso 1: si estamos en escala máxima, controlamos el vídeo
-		if (scale >= maxScale) {
-			gsap.to(page2, {
-				autoAlpha: 1,
-				duration: 0.5,
-				ease: 'power2.out',
-			});
+	function animateLogo() {
+		// Calcular la escala lineal entre 1 y maxScale basada en el scroll
+		scale = 1 + (currentPosition / windowHeight) * (maxScale - 1);
+		scale = Math.min(maxScale, Math.max(1, scale)); // limitar entre 1 y maxScale
 
-			if (!jumpLoaded) {
-				jump.src = 'jump.mp4';
-				jump.load();
-				jump.pause(); // control manual
-				jumpLoaded = true;
-			}
+		const progress = (scale - 1) / (maxScale - 1);
+		const easedProgress = Math.pow(progress, 0.8);
 
-			if (jump.readyState >= 2 && jump.duration) {
-				const framesPerScroll = 0.5; // segundos que avanza por tick
-				const direction = Math.sign(deltaY);
+		gsap.to(logo, {
+			scale: scale,
+			x: moveX * easedProgress,
+			y: moveY * easedProgress,
+			duration: 0.3,
+			ease: 'power2.out',
+		});
+	}
 
-				jump.currentTime = Math.max(0, Math.min(jump.duration, jump.currentTime + direction * framesPerScroll));
-
-				// Solo cuando el vídeo vuelve al principio permitimos reducir la escala
-				if (jump.currentTime <= 0.1 && direction < 0) {
-					scale = maxScale - 0.1; // bajamos un poco para salir del "modo vídeo"
-				}
-			}
+	function animateJump() {
+		if (!jumpLoaded) {
+			jump.src = 'jump.mp4';
+			jump.load();
+			jump.pause(); // control manual
+			jumpLoaded = true;
 		}
 
-		// Caso 2: si el logo no está en escala máxima, seguimos escalando el logo
-		if (scale < maxScale) {
-			scale += deltaY * 0.005;
-			scale = Math.max(1, Math.min(maxScale, scale));
+		gsap.to(page2, {
+			autoAlpha: 1,
+			duration: 0.5,
+			ease: 'power2.out',
+		});
 
-			const progress = (scale - 1) / (maxScale - 1);
-			const easedProgress = Math.pow(progress, 0.8);
+		if (jump.readyState >= 2 && jump.duration) {
+			const videoLength = jump.duration;
+			let second = 0 + ((currentPosition - windowHeight) / windowHeight) * videoLength;
+			jump.currentTime = second;
+		}
+	}
 
-			gsap.to(logo, {
-				scale: scale,
-				x: moveX * easedProgress,
-				y: moveY * easedProgress,
-				duration: 0.3,
-				ease: 'power2.out',
-			});
+	function updatePosition(deltaY) {
+		currentPosition += deltaY;
+		if (currentPosition < 0) {
+			currentPosition = 0;
+		}
 
-			if (scale < maxScale) {
+		const page = Math.floor(currentPosition / windowHeight);
+
+		switch (page) {
+			case 0:
 				gsap.to(page2, {
 					autoAlpha: 0,
 					duration: 0.5,
 					ease: 'power2.out',
 				});
-			}
+				animateLogo();
+				break;
+			case 1:
+				animateJump();
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -86,7 +98,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		'wheel',
 		(e) => {
 			e.preventDefault();
-			updateLogo(e.deltaY * 3);
+			updatePosition(e.deltaY);
 		},
 		{passive: false},
 	);
@@ -105,8 +117,17 @@ window.addEventListener('DOMContentLoaded', () => {
 			e.preventDefault();
 			const deltaY = touchStartY - e.touches[0].clientY;
 			touchStartY = e.touches[0].clientY;
-			updateLogo(deltaY * 10); // prueba con 0.01 o 0.005
+			updatePosition(deltaY * 2);
 		},
 		{passive: false},
 	);
+
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowUp') {
+			updatePosition(-Math.floor(windowHeight / 10));
+		}
+		if (e.key === 'ArrowDown') {
+			updatePosition(Math.floor(windowHeight / 10));
+		}
+	});
 });
