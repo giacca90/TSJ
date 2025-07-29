@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			const scrollFactor = (currentPosition - windowHeight) / windowHeight;
 			let frameIndex = Math.floor(scrollFactor * totalFrames);
 
-			frameIndex = Math.max(0, Math.min(frameIndex, totalFrames - 1)); // clamp
+			frameIndex = Math.max(0, Math.min(frameIndex, totalFrames - 1)) + 1; // clamp
 
 			// Mostrar la imagen actual
 			jump.src = jumpFrames[frameIndex].src;
@@ -136,10 +136,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	window.addEventListener('keydown', (e) => {
 		if (e.key === 'ArrowUp') {
-			updatePosition(-Math.floor(windowHeight / 10));
+			updatePosition(-Math.floor(windowHeight / 300));
 		}
 		if (e.key === 'ArrowDown') {
-			updatePosition(Math.floor(windowHeight / 10));
+			updatePosition(Math.floor(windowHeight / 300));
 		}
 	});
 });

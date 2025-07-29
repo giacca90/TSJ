@@ -74,7 +74,7 @@ nav {
 	transform: translate(-50%, -50%);
 	width: 95%;
 	height: 95%;
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.8);
 	display: flex;
 	visibility: hidden;
 	opacity: 0;
@@ -91,10 +91,23 @@ nav {
 }
 
 .page-2 .jump {
-	height: 90%;
 	width: 30%;
+	height: auto;
 	margin: 15px;
 	border: 0;
+
+	/* Fade en los 3 bordes (izquierda, derecha, abajo) con 5% */
+	-webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 100%), linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100%);
+	-webkit-mask-composite: intersect;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	-webkit-mask-size: cover;
+
+	mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 100%), linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100%);
+	mask-composite: intersect;
+	mask-repeat: no-repeat;
+	mask-position: center;
+	mask-size: cover;
 }
 
 .page-2 p {
