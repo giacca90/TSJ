@@ -93,8 +93,8 @@ nav {
 .page-2 .jump {
 	height: 90%;
 	width: 30%;
-	border: 2px solid red;
 	margin: 15px;
+	border: 0;
 }
 
 .page-2 p {

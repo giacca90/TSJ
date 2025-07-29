@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const jump = document.querySelector('.jump');
 	const maxScale = 15;
 	const windowHeight = window.innerHeight;
+	let jumpFrames = [];
 	let jumpLoaded = false;
 	let scale = 1;
 	let touchStartY = 0;
@@ -48,12 +49,19 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
+	function loadJumpFrames() {
+		const totalFrames = 156; // número total de imágenes exportadas
+		for (let i = 0; i < totalFrames; i++) {
+			const img = new Image();
+			img.src = `framesJump/frame_${String(i).padStart(4, '0')}.webp`;
+			jumpFrames.push(img);
+		}
+		jumpLoaded = true;
+	}
+
 	function animateJump() {
 		if (!jumpLoaded) {
-			jump.src = 'jump.mp4';
-			jump.load();
-			jump.pause(); // control manual
-			jumpLoaded = true;
+			loadJumpFrames();
 		}
 
 		gsap.to(page2, {
@@ -62,13 +70,17 @@ window.addEventListener('DOMContentLoaded', () => {
 			ease: 'power2.out',
 		});
 
-		if (jump.readyState >= 2 && jump.duration) {
-			const videoLength = jump.duration;
-			let second = 0 + ((currentPosition - windowHeight) / windowHeight) * videoLength;
-			jump.currentTime = second;
+		if (jumpLoaded) {
+			const totalFrames = jumpFrames.length;
+			const scrollFactor = (currentPosition - windowHeight) / windowHeight;
+			let frameIndex = Math.floor(scrollFactor * totalFrames);
+
+			frameIndex = Math.max(0, Math.min(frameIndex, totalFrames - 1)); // clamp
+
+			// Mostrar la imagen actual
+			jump.src = jumpFrames[frameIndex].src;
 		}
 	}
-
 	function updatePosition(deltaY) {
 		currentPosition += deltaY;
 		if (currentPosition < 0) {
