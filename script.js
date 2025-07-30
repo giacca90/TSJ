@@ -70,6 +70,12 @@ window.addEventListener('DOMContentLoaded', () => {
 			ease: 'power2.out',
 		});
 
+		const last = document.getElementById('last');
+		const rect = last.getBoundingClientRect();
+		if (rect.bottom > window.innerHeight) {
+			last.style.display = 'none';
+		}
+
 		if (jumpLoaded) {
 			const totalFrames = jumpFrames.length;
 			const scrollFactor = (currentPosition - windowHeight) / windowHeight;
@@ -81,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			const oldFrameIndex = match ? parseInt(match[1], 10) - 1 : null;
 			const diff = frameIndex - oldFrameIndex;
 
-			if (Math.abs(diff) > 9) {
+			if (Math.abs(diff) > 6) {
 				const steps = Math.abs(diff);
 				const direction = diff > 0 ? 1 : -1;
 				const subtime = 300 / steps;
