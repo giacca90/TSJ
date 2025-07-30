@@ -75,10 +75,26 @@ window.addEventListener('DOMContentLoaded', () => {
 			const scrollFactor = (currentPosition - windowHeight) / windowHeight;
 			let frameIndex = Math.floor(scrollFactor * totalFrames);
 
-			frameIndex = Math.max(0, Math.min(frameIndex, totalFrames - 1)) + 1; // clamp
+			frameIndex = Math.max(0, Math.min(frameIndex, totalFrames - 1)) + 1;
 
-			// Mostrar la imagen actual
-			jump.src = jumpFrames[frameIndex].src;
+			const match = jump.src.match(/frame_(\d+)\.webp/);
+			const oldFrameIndex = match ? parseInt(match[1], 10) - 1 : null;
+			const diff = frameIndex - oldFrameIndex;
+
+			if (Math.abs(diff) > 9) {
+				const steps = Math.abs(diff);
+				const direction = diff > 0 ? 1 : -1;
+				const subtime = 300 / steps;
+
+				for (let i = 1; i <= steps; i++) {
+					setTimeout(() => {
+						const currentIndex = oldFrameIndex + i * direction;
+						jump.src = jumpFrames[currentIndex].src;
+					}, i * subtime);
+				}
+			} else {
+				jump.src = jumpFrames[frameIndex].src;
+			}
 		}
 	}
 	function updatePosition(deltaY) {
@@ -136,10 +152,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	window.addEventListener('keydown', (e) => {
 		if (e.key === 'ArrowUp') {
-			updatePosition(-Math.floor(windowHeight / 300));
+			updatePosition(-Math.floor(windowHeight / 10));
 		}
 		if (e.key === 'ArrowDown') {
-			updatePosition(Math.floor(windowHeight / 300));
+			updatePosition(Math.floor(windowHeight / 10));
 		}
 	});
 });
