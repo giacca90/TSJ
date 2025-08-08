@@ -138,3 +138,72 @@ nav {
 	margin: 5px 15px;
 	padding: 0;
 }
+
+#lang-selector {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+}
+
+#current-lang-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+#current-lang-btn img {
+	width: 32px;
+	height: 32px;
+}
+
+#lang-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: fadeIn 0.3s ease forwards;
+}
+
+#lang-overlay.hidden {
+	display: none;
+}
+
+#lang-options {
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	display: grid;
+	gap: 10px;
+}
+
+#lang-options button {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: none;
+	border: 1px solid #ccc;
+	padding: 8px 12px;
+	cursor: pointer;
+	border-radius: 6px;
+}
+
+#lang-options button:hover {
+	background: #f0f0f0;
+}
+
+#lang-options button img {
+	width: 24px;
+	height: 24px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

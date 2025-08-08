@@ -5,42 +5,62 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>TSJ WakePark</title>
 		<link rel="stylesheet" href="styles.css" />
+		<script src="./i18n.js"></script>
 	</head>
 	<body>
 		<video id="bg-video" autoplay muted loop>
-			<source src="video.mp4" type="video/mp4" />
+			<source src="video.mp4" type="video/mp4" data-i18n="error_html5" />
 			Tu navegador no soporta video HTML5.
 		</video>
 
 		<nav>
 			<div class="links">
-				<a href="">Telesquí</a>
-				<a href="">Salto de agua</a>
-				<a href="">Parque acuático</a>
+				<a href="" data-i18n="link_telesqui">Telesquí</a>
+				<a href="" data-i18n="link_waterjump">Salto de agua</a>
+				<a href="" data-i18n="link_waterpark">Parque acuático</a>
 			</div>
 			<img id="logo" src="Untitled-design.png" alt="Logo" />
 			<div class="links">
-				<a href="">Restaurante</a>
-				<a href="">Precios y horarios</a>
-				<a href="">Para reservar</a>
+				<a href="" data-i18n="link_restaurant">Restaurante</a>
+				<a href="" data-i18n="link_prices">Precios y horarios</a>
+				<a href="" data-i18n="link_booking">Para reservar</a>
 			</div>
 		</nav>
 
 		<div class="page-2">
 			<img class="jump" src="" /><img />
 			<div class="content">
-				<h1>¡Bienvenido a TSJ!</h1>
-				<p>
+				<h1 data-i18n="welcome">¡Bienvenido a TSJ!</h1>
+				<p data-i18n="welcome_p1"></p>
 					El telesquí de Saint Jean, en los Pirineos Orientales (66), es el más meridional de Francia. Situado entre Perpiñán y la frontera española, venga a descubrir nuestros telesquíes de 5 y 2 pilones, el Water Jump, el Aquapark y el
 					restaurante La Paillote en un entorno excepcional.
 				</p>
-				<p>¡En el lago Saint-Jean Pla de Corts, en Vallespir, protegido del viento!</p>
-				<p id="last">
+				<p data-i18n="welcome_p2">¡En el lago Saint-Jean Pla de Corts, en Vallespir, protegido del viento!</p>
+				<p id="last" data-i18n="welcome_p3"></p>
 					Desde principiantes hasta profesionales, y de 7 a 77 años, nuestro telesquí y nuestro equipo de monitores cualificados están a su disposición para disfrutar de momentos inolvidables de esquí con amigos, solos o en familia. ¡Viva
 					sus vacaciones al máximo, emociones garantizadas!
 				</p>
 			</div>
 		</div>
+
+		<!-- Botón actual de idioma -->
+		<div id="lang-selector">
+		  <button id="current-lang-btn">
+		    <img id="current-lang-flag" src="./flags/en.webp" alt="Current language">
+		  </button>
+		
+		  <!-- Cortina de idiomas -->
+		  <div id="lang-overlay" class="hidden">
+		    <div id="lang-options">
+		      <button data-lang="en"><img src="./flags/en.webp" alt="English"> English</button>
+		      <button data-lang="es"><img src="./flags/es.webp" alt="Español"> Español</button>
+		      <button data-lang="fr"><img src="./flags/fr.webp" alt="Français"> Français</button>
+		      <button data-lang="it"><img src="./flags/it.webp" alt="Italiano"> Italiano</button>
+		      <button data-lang="ca"><img src="./flags/ca.webp" alt="Català"> Català</button>
+		    </div>
+		  </div>
+		</div>
+
 		<script src="libs/gsap.min.js"></script>
 		<script src="script.js"></script>
 	</body>
