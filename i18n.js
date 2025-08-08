@@ -26,7 +26,7 @@
 			});
 
 			const flagEl = document.getElementById('current-lang-flag');
-			if (flagEl) flagEl.src = `${basePath}flags/${lang}.svg`;
+			if (flagEl) flagEl.src = `${basePath}flags/${lang}.webp`;
 
 			localStorage.setItem('lang', lang);
 		} catch (err) {
