@@ -13,7 +13,7 @@
 
 	async function loadLanguage(lang) {
 		try {
-			const res = await fetch(`${basePath}lang/${lang}.json`, {cache: 'no-cache'});
+			const res = await fetch(`${basePath}langs/${lang}.json`, {cache: 'no-cache'});
 			if (!res.ok) throw new Error('File not found');
 			const translations = await res.json();
 
