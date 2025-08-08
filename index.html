@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>TSJ WakePark</title>
 		<link rel="stylesheet" href="styles.css" />
+		<link rel="icon" href="./Untitled-design.png" type="image/png" />
 		<script src="./i18n.js"></script>
 	</head>
 	<body>
@@ -31,12 +32,12 @@
 			<img class="jump" src="" /><img />
 			<div class="content">
 				<h1 data-i18n="welcome">¡Bienvenido a TSJ!</h1>
-				<p data-i18n="welcome_p1"></p>
+				<p data-i18n="welcome_p1">
 					El telesquí de Saint Jean, en los Pirineos Orientales (66), es el más meridional de Francia. Situado entre Perpiñán y la frontera española, venga a descubrir nuestros telesquíes de 5 y 2 pilones, el Water Jump, el Aquapark y el
 					restaurante La Paillote en un entorno excepcional.
 				</p>
 				<p data-i18n="welcome_p2">¡En el lago Saint-Jean Pla de Corts, en Vallespir, protegido del viento!</p>
-				<p id="last" data-i18n="welcome_p3"></p>
+				<p id="last" data-i18n="welcome_p3">
 					Desde principiantes hasta profesionales, y de 7 a 77 años, nuestro telesquí y nuestro equipo de monitores cualificados están a su disposición para disfrutar de momentos inolvidables de esquí con amigos, solos o en familia. ¡Viva
 					sus vacaciones al máximo, emociones garantizadas!
 				</p>
@@ -45,20 +46,20 @@
 
 		<!-- Botón actual de idioma -->
 		<div id="lang-selector">
-		  <button id="current-lang-btn">
-		    <img id="current-lang-flag" src="./flags/en.webp" alt="Current language">
-		  </button>
-		
-		  <!-- Cortina de idiomas -->
-		  <div id="lang-overlay" class="hidden">
-		    <div id="lang-options">
-		      <button data-lang="en"><img src="./flags/en.webp" alt="English"> English</button>
-		      <button data-lang="es"><img src="./flags/es.webp" alt="Español"> Español</button>
-		      <button data-lang="fr"><img src="./flags/fr.webp" alt="Français"> Français</button>
-		      <button data-lang="it"><img src="./flags/it.webp" alt="Italiano"> Italiano</button>
-		      <button data-lang="ca"><img src="./flags/ca.webp" alt="Català"> Català</button>
-		    </div>
-		  </div>
+			<button id="current-lang-btn">
+				<img id="current-lang-flag" src="./flags/en.webp" alt="Current language" />
+			</button>
+
+			<!-- Cortina de idiomas -->
+			<div id="lang-overlay" class="hidden">
+				<div id="lang-options">
+					<button data-lang="en"><img src="./flags/en.webp" alt="English" /> English</button>
+					<button data-lang="es"><img src="./flags/es.webp" alt="Español" /> Español</button>
+					<button data-lang="fr"><img src="./flags/fr.webp" alt="Français" /> Français</button>
+					<button data-lang="it"><img src="./flags/it.webp" alt="Italiano" /> Italiano</button>
+					<button data-lang="ca"><img src="./flags/ca.webp" alt="Català" /> Català</button>
+				</div>
+			</div>
 		</div>
 
 		<script src="libs/gsap.min.js"></script>
