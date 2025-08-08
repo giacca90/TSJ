@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 (function () {
 	const supported = ['en', 'es', 'fr', 'it', 'ca'];
-	const flagPath = './flags/'; // Ruta de las banderas
+	const basePath = window.location.pathname.replace(/\/[^/]*$/, '/');
 
 	function detectLanguage() {
 		const savedLang = localStorage.getItem('lang');
@@ -13,7 +13,7 @@
 
 	async function loadLanguage(lang) {
 		try {
-			const res = await fetch(`./lang/${lang}.json`, {cache: 'no-cache'});
+			const res = await fetch(`${basePath}lang/${lang}.json`, {cache: 'no-cache'});
 			if (!res.ok) throw new Error('File not found');
 			const translations = await res.json();
 
@@ -25,11 +25,9 @@
 				}
 			});
 
-			// Cambiar bandera del botón
 			const flagEl = document.getElementById('current-lang-flag');
-			if (flagEl) flagEl.src = `${flagPath}${lang}.svg`;
+			if (flagEl) flagEl.src = `${basePath}flags/${lang}.svg`;
 
-			// Guardar en localStorage
 			localStorage.setItem('lang', lang);
 		} catch (err) {
 			console.warn(`Could not load language "${lang}", falling back to English`);
@@ -60,7 +58,9 @@
 		});
 	}
 
-	const lang = detectLanguage();
-	loadLanguage(lang);
-	document.addEventListener('DOMContentLoaded', setupLangSelector);
+	document.addEventListener('DOMContentLoaded', () => {
+		const lang = detectLanguage();
+		loadLanguage(lang);
+		setupLangSelector();
+	});
 })();
