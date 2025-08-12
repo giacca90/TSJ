@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 (function () {
-	const supported = ['en', 'es', 'fr', 'it', 'ca'];
+	const supported = ['en', 'es', 'fr', 'it', 'ca', 'nl', 'ru'];
 	const basePath = window.location.pathname.replace(/\/[^/]*$/, '/');
 
 	function detectLanguage() {
