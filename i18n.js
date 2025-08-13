@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 (function () {
-	const supported = ['en', 'es', 'fr', 'it', 'ca', 'nl', 'ru'];
+	const supported = ['fr', 'es', 'en', 'ca', 'it', 'de', 'nl', 'ru'];
 	const basePath = window.location.pathname.replace(/\/[^/]*$/, '/');
 
 	function detectLanguage() {
@@ -21,7 +21,11 @@
 			document.querySelectorAll('[data-i18n]').forEach((el) => {
 				const key = el.getAttribute('data-i18n');
 				if (translations[key]) {
-					el.textContent = translations[key];
+					if (el.tagName.toLowerCase() === 'meta') {
+						el.setAttribute('content', translations[key]);
+					} else {
+						el.textContent = translations[key];
+					}
 				}
 			});
 
